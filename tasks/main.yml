@@ -1,0 +1,19 @@
+- name: Configure ntpd
+  template:
+    src: ntpd.conf
+    dest: /etc/ntpd.conf
+    owner: root
+    group: wheel
+    mode: 0644
+  notify:
+    - ntpd
+
+- name: Enable ntpd
+  copy:
+    src: 10-ntp
+    dest: /etc/rc.conf.local.d/10-ntpd
+    owner: root
+    group: wheel
+    mode: 0644
+  notify:
+    - rc.conf.local
